@@ -62,10 +62,15 @@ require('session.php');
                     while ($indicator = mysqli_fetch_array($reg_info)) {
                         $text .= '<p>' . $indicator["ind_name"] . ': ' . $indicator["value"] . '</p>';
                     }
-                    $text .= '<p>Также вы можете обновить или добавить данные по <a class="add_info_link" href="add_info.php">ссылке</a></p>';
+                    if ($session_user != false){
+                    $text .= '<p>Также вы можете обновить или добавить данные по <a class="add_info_link" href="add_info.php">ссылке</a></p>';}
                     $text .= '</div></div></div></div>';
                 } else {
-                    $text .= '<p>Данных об этом районе пока нет, но вы можете их добавить по <a class="add_info_link" href="add_info.php">ссылке</a></p></div></div></div></div>';
+                    if ($session_user != false){
+                    $text .= '<p>Данных об этом районе пока нет, но вы можете их добавить по <a class="add_info_link" href="add_info.php">ссылке</a></p></div></div></div></div>';}
+                    else {
+                        $text .= '<p>Данных об этом районе пока нет</p></div></div></div></div>';    
+                    }
                 }
                 echo $text;
             }
